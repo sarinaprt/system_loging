@@ -1,1 +1,5 @@
+<<<<<<< HEAD
  - 1:'sarina' - 2:'amire'  - 3:'ashkan' - 4:'samaane' - 5:'lila'
+=======
+ - 1:'sarina' - 2:'amire' 
+>>>>>>> 9184d3349f427c3cf9c6301f8355cc404cbd433e
