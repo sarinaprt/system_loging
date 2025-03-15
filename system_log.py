@@ -10,33 +10,61 @@ if not os.path.exists("password_file.txt"):
         p.write("")
     print("password folder")
         
-with open("username_file.txt", "r", encoding="utf-8") as f:
-    read_user_file = f.read()
-    print(read_user_file)
-with open("password_file.txt", "r", encoding="utf-8") as f:
-    read_pass_file = f.read()
-    print("password file")
 
-username = input("please enter your user name: ").strip("")
-password=input("please enter your password").strip("")
+username = input("Please enter your username: ").strip("")
+password = input("Please enter your password: ").strip("")
 
-name= re.findall(r":'(\w+)'", read_user_file)
+user_id=None
+pass_id=None
+with open("username_file.txt", "r", encoding="utf-8") as f_user:
+    for line in f_user:
+        id= re.search(rf"-\s*(\d+):'{username}'", line)
+        if id:
+            user_id=id.group(1)
+            break
 
-if username in name:
-    id=re.search(rf"-( \d+):'{username}'",read_user_file).group(1)
-    find_pass=re.search(rf"-{id}:'(\w+\d+|\d+\w+|\d+|\w+)'",read_pass_file)#r'[a-zA-Z]+\d+|\d+[a-zA-Z]+'
-    password_finded=find_pass.group(1) if find_pass else "not found"
-    if password_finded == password:
-        print("new page")
+if user_id:
+    with open("password_file.txt","r",encoding="utf-8")as f:
+        lines=f.readlines()
+
+    for line in lines:
+        pass_finded_atr=re.search(rf"-\s*{user_id}:\s*'(.+?)'\s*",line)
+        if pass_finded_atr:
+            pass_finded=pass_finded_atr.group(1).strip()
+            break
+
+    if pass_finded == password:
+        num = input("If you want to change your password enter 1, if you want to know your ID enter 2: ")
+
+        if num=="1":
+            new_pass=input("enter yor new password:\n")
+            with open("password_file.txt", "r", encoding="utf-8") as f, open("temp.txt", "w", encoding="utf-8") as temp:
+                for line in f:
+                    updated_lines = re.sub(rf"-\s*{user_id}:'{pass_finded}'", rf"- {user_id}:'{new_pass}'", line)
+                    temp.write(updated_lines)
+            os.replace("temp.txt","password_file.txt")
+            print("✅ Password updated successfully!")
+
+
+        elif num == "2":
+            print(f"Your ID is: {id}")
+
+
     else:
-        print("wrong password")
+                
+        print("❌ Wrong password!")
 
 
 else:
-    id_user = read_user_file.count(":") + 1 
-    with open("username_file.txt", "a", encoding="utf-8") as f:
-        f.write(f" - {id_user}:'{username}'")  
-    
-    with open("password_file.txt","a",encoding="utf-8")as f:
-        f.write(f" - {id_user}:'{password}'")
+    with open("username_file.txt", "r", encoding="utf-8") as f_user:
+        content = f_user.read()
+        new_id = content.count(":") + 1  
+        #new_id = sum(1 for _ in open("username_file.txt", encoding="utf-8")) + 1
 
+    with open("username_file.txt", "a", encoding="utf-8") as f_user, \
+        open("password_file.txt", "a", encoding="utf-8") as f_pass:
+        
+        f_user.write(f"- {new_id}:'{username}'\n") 
+        f_pass.write(f"- {new_id}:'{password}'\n")
+
+    print("✅ New user registered successfully!")
