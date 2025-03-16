@@ -1,5 +1,69 @@
 import os
 import re
+from pydub import AudioSegment
+from pydub.playback import play
+
+
+sound_so={
+    "1":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\۱.wav",
+    "2":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\2.wav",
+    "3":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\3.wav",
+    "4":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\4.wav",
+    "5":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\5.wav",
+    "6":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\6.wav",
+    "7":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\7.wav",
+    "8":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\8.wav",
+    "9":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\9.wav",
+    "10":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\10.wav",
+    "11":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\11.wav",
+    "12":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\12.wav",
+    "13":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\13.wav",
+    "14":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\14.wav",
+    "15":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\15.wav",
+    "16":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\16.wav",
+    "17":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\17.wav",
+    "18":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\18.wav",
+    "19":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\19.wav",
+    "20":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\20.wav",
+    "30":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\30.wav",
+    "40":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\40.wav",
+    "50":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\50.wav",
+    "60":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\60.wav",
+    "70":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\70.wav",
+    "80":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\80.wav",
+    "90":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\90.wav",
+    "100":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\100.wav",
+    "و":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\او.wav"
+    }
+def sound_play(user_id):
+    sound_1 = []  # لیست برای ذخیره‌ی فایل‌های صوتی
+    
+    user_id = str(user_id)  # تبدیل به رشته
+    if user_id in sound_so:  
+        file_path = sound_so[user_id]
+        if os.path.exists(file_path):
+            sound = AudioSegment.from_file(file_path)
+            play(sound)
+            print("🎵 Playing full ID sound")
+        else:
+            print(f"⚠️ Error: File not found - {file_path}")
+    else:
+        for num in user_id:
+            if num in sound_so:
+                file_path = sound_so[num]
+                if os.path.exists(file_path):
+                    sound_1.append(AudioSegment.from_file(file_path))
+                else:
+                    print(f"⚠️ File not found: {file_path}")
+            else:
+                print(f"⚠️ No sound file for number: {num}")
+
+        if sound_1:  
+            for sound in sound_1:
+                play(sound)
+        else:
+            print("❌ No matching sound found.")
+
 
 if not os.path.exists("username_file.txt"):
     with open("username_file.txt", "w", encoding="utf-8") as f:
@@ -47,8 +111,8 @@ if user_id:
 
 
         elif num == "2":
-            print(f"Your ID is: {id}")
-
+            print(f"Your ID is: {user_id}")
+            sound_play(user_id)
 
     else:
                 
