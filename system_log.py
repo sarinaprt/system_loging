@@ -121,8 +121,7 @@ else:
         new_id = content.count(":") + 1  
         #new_id = sum(1 for _ in open("username_file.txt", encoding="utf-8")) + 1
 
-    with open("username_file.txt", "a", encoding="utf-8") as f_user, \
-        open("password_file.txt", "a", encoding="utf-8") as f_pass:
+    with open("username_file.txt", "a", encoding="utf-8") as f_user, open("password_file.txt", "a", encoding="utf-8") as f_pass:
         
         f_user.write(f"- {new_id}:'{username}'\n") 
         f_pass.write(f"- {new_id}:'{password}'\n")
