@@ -54,7 +54,7 @@ def sound_play(user_id):
                 else:
                     print("file path not exists")
             else:
-                print(f"⚠️ No sound file for number: {num}")
+                print(f" No sound file for number: {num}")
         if sound_list:
             for sound in sound_list:
                 play(sound)
@@ -104,7 +104,7 @@ if user_id:
                     updated_lines = re.sub(rf"-\s*{user_id}:'{pass_finded}'", rf"- {user_id}:'{new_pass}'", line)
                     temp.write(updated_lines)
             os.replace("temp.txt","password_file.txt")
-            print("✅ Password updated successfully!")
+            print("Password updated successfully!")
 
 
         elif num == "2":
@@ -112,7 +112,7 @@ if user_id:
             sound_play(user_id)
     else:
                 
-        print("❌ Wrong password!")
+        print("Wrong password!")
 
 
 else:
@@ -127,4 +127,4 @@ else:
         f_user.write(f"- {new_id}:'{username}'\n") 
         f_pass.write(f"- {new_id}:'{password}'\n")
 
-    print("✅ New user registered successfully!")
+    print("New user registered successfully!")
