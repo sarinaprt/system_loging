@@ -2,7 +2,7 @@ import os
 import re
 from pydub import AudioSegment
 from pydub.playback import play
-
+print(os.getcwd())
 
 sound_so={
     "1":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\۱.wav",
@@ -36,33 +36,30 @@ sound_so={
     "و":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\او.wav"
     }
 def sound_play(user_id):
-    sound_1 = []  # لیست برای ذخیره‌ی فایل‌های صوتی
-    
-    user_id = str(user_id)  # تبدیل به رشته
-    if user_id in sound_so:  
-        file_path = sound_so[user_id]
+    sound_list=[]
+    if str(user_id) in sound_so:
+        file_path=sound_so[user_id]
         if os.path.exists(file_path):
-            sound = AudioSegment.from_file(file_path)
+            sound=AudioSegment.from_file(file_path)
             play(sound)
-            print("🎵 Playing full ID sound")
         else:
-            print(f"⚠️ Error: File not found - {file_path}")
+            print("file path not exists")
     else:
         for num in user_id:
             if num in sound_so:
-                file_path = sound_so[num]
+                file_path=sound_so[num]
                 if os.path.exists(file_path):
-                    sound_1.append(AudioSegment.from_file(file_path))
+                    sound=AudioSegment.from_file(file_path)
+                    sound_list.append(sound)
                 else:
-                    print(f"⚠️ File not found: {file_path}")
+                    print("file path not exists")
             else:
                 print(f"⚠️ No sound file for number: {num}")
-
-        if sound_1:  
-            for sound in sound_1:
+        if sound_list:
+            for sound in sound_list:
                 play(sound)
         else:
-            print("❌ No matching sound found.")
+            print("not found")
 
 
 if not os.path.exists("username_file.txt"):
@@ -113,7 +110,6 @@ if user_id:
         elif num == "2":
             print(f"Your ID is: {user_id}")
             sound_play(user_id)
-
     else:
                 
         print("❌ Wrong password!")
