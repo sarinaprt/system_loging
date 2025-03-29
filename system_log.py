@@ -2,59 +2,32 @@ import os
 import re
 from pydub import AudioSegment
 from pydub.playback import play
-print(os.getcwd())
+import library
 
-sound_so={
-    "1":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\۱.wav",
-    "2":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\2.wav",
-    "3":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\3.wav",
-    "4":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\4.wav",
-    "5":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\5.wav",
-    "6":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\6.wav",
-    "7":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\7.wav",
-    "8":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\8.wav",
-    "9":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\9.wav",
-    "10":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\10.wav",
-    "11":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\11.wav",
-    "12":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\12.wav",
-    "13":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\13.wav",
-    "14":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\14.wav",
-    "15":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\15.wav",
-    "16":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\16.wav",
-    "17":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\17.wav",
-    "18":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\18.wav",
-    "19":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\19.wav",
-    "20":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\20.wav",
-    "30":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\30.wav",
-    "40":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\40.wav",
-    "50":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\50.wav",
-    "60":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\60.wav",
-    "70":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\70.wav",
-    "80":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\80.wav",
-    "90":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\90.wav",
-    "100":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\100.wav",
-    "و":"C:\\Users\\NoteBook\\Documents\\Cyberlink\\libraryss\\system_log.py\\numbers\\او.wav"
-    }
 def sound_play(user_id):
     sound_list=[]
-    if str(user_id) in sound_so:
-        file_path=sound_so[user_id]
+    if str(user_id) in library.sound_so:
+        file_path=library.sound_so[user_id]
         if os.path.exists(file_path):
             sound=AudioSegment.from_file(file_path)
             play(sound)
         else:
             print("file path not exists")
     else:
-        for num in user_id:
-            if num in sound_so:
-                file_path=sound_so[num]
-                if os.path.exists(file_path):
-                    sound=AudioSegment.from_file(file_path)
-                    sound_list.append(sound)
+        tens=(int(user_id)//10)*10
+        ones=int(user_id)%10
+        if int(user_id)>20 and ones!=0:
+            if str(tens) in library.sound_so and str(ones) in library.sound_so:
+                file_path_tens=library.sound_so[str(tens)]
+                file_path_ones=library.sound_so[str(ones)]
+                if os.path.exists(file_path_tens) and os.path.exists(file_path_ones):
+                    sound_list.append(AudioSegment.from_file(file_path_tens))
+                    sound_list.append(AudioSegment.from_file(library.sound_so["v"]))
+                    sound_list.append(AudioSegment.from_file(file_path_ones))
                 else:
                     print("file path not exists")
             else:
-                print(f"⚠️ No sound file for number: {num}")
+                print(f" No sound file for number: {num}")
         if sound_list:
             for sound in sound_list:
                 play(sound)
@@ -104,7 +77,7 @@ if user_id:
                     updated_lines = re.sub(rf"-\s*{user_id}:'{pass_finded}'", rf"- {user_id}:'{new_pass}'", line)
                     temp.write(updated_lines)
             os.replace("temp.txt","password_file.txt")
-            print("✅ Password updated successfully!")
+            print("Password updated successfully!")
 
 
         elif num == "2":
@@ -112,7 +85,7 @@ if user_id:
             sound_play(user_id)
     else:
                 
-        print("❌ Wrong password!")
+        print("Wrong password!")
 
 
 else:
@@ -121,10 +94,9 @@ else:
         new_id = content.count(":") + 1  
         #new_id = sum(1 for _ in open("username_file.txt", encoding="utf-8")) + 1
 
-    with open("username_file.txt", "a", encoding="utf-8") as f_user, \
-        open("password_file.txt", "a", encoding="utf-8") as f_pass:
+    with open("username_file.txt", "a", encoding="utf-8") as f_user, open("password_file.txt", "a", encoding="utf-8") as f_pass:
         
         f_user.write(f"- {new_id}:'{username}'\n") 
         f_pass.write(f"- {new_id}:'{password}'\n")
 
-    print("✅ New user registered successfully!")
+    print("New user registered successfully!")
