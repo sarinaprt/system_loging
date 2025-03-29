@@ -4,12 +4,12 @@ from pydub import AudioSegment
 from pydub.playback import play
 import sound_lib
 
-def sound_play(user_id):
+def sound_play(user_id,speed=2.5):
     sound_list=[]
-    if str(user_id) in sound_lib.sound_so:
+    if user_id in sound_lib.sound_so:
         file_path=sound_lib.sound_so[user_id]
         if os.path.exists(file_path):
-            sound=AudioSegment.from_file(file_path)
+            sound=AudioSegment.from_file(file_path).speedup(playback_speed=speed)+10
             play(sound)
         else:
             print("file path not exists")
@@ -21,9 +21,9 @@ def sound_play(user_id):
                 file_path_tens=sound_lib.sound_so[str(tens)]
                 file_path_ones=sound_lib.sound_so[str(ones)]
                 if os.path.exists(file_path_tens) and os.path.exists(file_path_ones):
-                    sound_list.append(AudioSegment.from_file(file_path_tens))
-                    sound_list.append(AudioSegment.from_file(sound_lib.sound_so["v"]))
-                    sound_list.append(AudioSegment.from_file(file_path_ones))
+                    sound_list.append(AudioSegment.from_file(file_path_tens).speedup(playback_speed=speed)+10)
+                    sound_list.append(AudioSegment.from_file(sound_lib.sound_so["v"]).speedup(playback_speed=2.5)+10)
+                    sound_list.append(AudioSegment.from_file(file_path_ones).speedup(playback_speed=speed)+10)
                 else:
                     print("file path not exists")
             else:
