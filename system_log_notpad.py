@@ -100,3 +100,4 @@ else:
         f_pass.write(f"- {new_id}:'{password}'\n")
 
     print("New user registered successfully!")
+
