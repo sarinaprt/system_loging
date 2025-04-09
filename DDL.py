@@ -43,3 +43,8 @@ def insert_user(USERNAME,password):
 
 if __name__=='__main__':
     user_exist()
+<<<<<<< HEAD
+=======
+    update_pass()
+    insert_user()
+>>>>>>> c4194e0d2840ce76d8b38a8ff5f8d1412ecd6a78
