@@ -23,7 +23,7 @@ def user():
     cur.execute("""CREATE TABLE IF NOT EXIST USERS(
                 id INT AUTO_INCREMENT PRIMERY KEY,
                 USERNAME VARCHAR(50) UNIQUE NOT NULL,
-                EMAIL VARCHAR(50) UNIQUE NOT NULL,
+                password VARCHAR(100) NOT NULL,
                 CREATE_AT TIMSTAMP DEFULT CURRENT_TIMESTAMP
 
     )""")

@@ -1,9 +1,9 @@
 import os
-import re
 from pydub import AudioSegment
 from pydub.playback import play
 import sound_lib
 import DDL
+import tkinter as tk
 
 def sound_play(user_id,speed=2.5):
     sound_list=[]
@@ -55,8 +55,9 @@ if user:
         elif Access == "2":
             print(f"Your ID is : {user_id}")
             sound_play(user_id)
+
         elif Access=="3":
-            print("calculater")
+            print("calculator")
     else:
                 
         print("Wrong password!")
