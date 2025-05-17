@@ -2,7 +2,7 @@ from mysql.connector import connection, Error
 
 
 def user_exist(USERNAME):
-    config={'user':'root','password':'belive_god1527','host':'localhost','database':'system_log'}
+    config={'user':'root','password':'','host':'localhost','database':'system_log'}
     conn=connection.MySQLConnection(**config)
     cur=conn.cursor()
     cur.execute("select * from USERS where USERNAME=%s",(USERNAME,))
@@ -18,7 +18,7 @@ def user_exist(USERNAME):
         return None
 
 def update_pass(password,id):
-    config={'user':'root','password':'belive_god1527','host':'localhost','database':'system_log'}
+    config={'user':'root','password':'','host':'localhost','database':'system_log'}
     conn=connection.MySQLConnection(**config)
     cur=conn.cursor()
     cur.execute("update USERS set password=%s where id=%s",(password,id))
@@ -29,7 +29,7 @@ def update_pass(password,id):
 
 
 def insert_user(USERNAME,password):
-    config={'user':'root','password':'belive_god1527','host':'localhost','database':'system_log'}
+    config={'user':'root','password':'','host':'localhost','database':'system_log'}
     conn=connection.MySQLConnection(**config)
     cur=conn.cursor()
     SQL_QUERY="INSERT INTO USERS(USERNAME,PASSWORD) VALUES ( %s, %s)"
@@ -40,7 +40,7 @@ def insert_user(USERNAME,password):
 
 
 def get_calendar_note(id,DATE_TIME):
-    config={'user':'root','password':'belive_god1527','host':'localhost','database':'system_log'}
+    config={'user':'root','password':'','host':'localhost','database':'system_log'}
     conn=connection.MySQLConnection(**config)
     cur=conn.cursor()
     cur.execute("SELECT NOTE FROM CALENDER WHERE id=%s and DATE_TIME=%s ",(id,DATE_TIME))
@@ -53,7 +53,7 @@ def get_calendar_note(id,DATE_TIME):
     else:
         return None
 def update_or_insert_calendar(user_id,date,NOTE):
-    config={'user':'root','password':'belive_god1527','host':'localhost','database':'system_log'}
+    config={'user':'root','password':'','host':'localhost','database':'system_log'}
     conn=connection.MySQLConnection(**config)
     cur=conn.cursor()
     cur.execute("SELECT NOTE FROM CALENDER WHERE id=%s and DATE_TIME=%s ",(user_id,date))

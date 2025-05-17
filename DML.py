@@ -1,7 +1,7 @@
 from mysql.connector import connection,Error
 
 def drop_creat_database(system_log):
-    config={'user':'root','password':'belive_god1527','host':'localhost'}
+    config={'user':'root','password':'','host':'localhost'}
     try:
         conn=connection.MySQLConnection(**config)
         cur=conn.cursor()
@@ -16,7 +16,7 @@ def drop_creat_database(system_log):
 
 
 def user():
-    config={'user':'root','password':'belive_god1527','host':'localhost','database':'system_log'}
+    config={'user':'root','password':'','host':'localhost','database':'system_log'}
     conn=connection.MySQLConnection(**config)
     cur=conn.cursor()
     cur.execute("""CREATE TABLE IF NOT EXISTS USERS(
@@ -31,7 +31,7 @@ def user():
     conn.close()
 
 def calender():
-    config={'user':'root','password':'belive_god1527','host':'localhost','database':'system_log'}
+    config={'user':'root','password':'','host':'localhost','database':'system_log'}
     conn=connection.MySQLConnection(**config)
     cur=conn.cursor()
     cur.execute("""CREATE TABLE IF NOT EXISTS CALENDER(
