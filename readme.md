@@ -18,4 +18,4 @@ This project is designed to handle **user login and access control** for a calcu
 
 - When a new user attempts to access the application for the first time, their credentials are stored in the user database.
 - If the user already exists, they can log in by providing a valid username and password.
-- The system ensures that only registered users with valid credentials can access the calculator functionality.
+- The system ensures that only registered users with valid credentials can access the calculator,calender functionality.
