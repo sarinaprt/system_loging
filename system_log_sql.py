@@ -3,7 +3,8 @@ from pydub import AudioSegment
 from pydub.playback import play
 import sound_lib
 import DDL
-import tkinter as tk
+import calcu
+from calend import app_calender
 
 def sound_play(user_id,speed=2.5):
     sound_list=[]
@@ -45,7 +46,7 @@ if user:
     password_sql=user[1]
 
     if password_sql == password:
-        Access = input("If you want to change your password enter 1, if you want to know your ID enter 2 ,calculater enter 3: ")
+        Access = input("If you want to change your password enter 1, if you want to know your ID enter 2 ,calculater enter 3, daily note number 4: ")
 
         if Access=="1":
             new_password=input("enter yor new password:\n")
@@ -57,7 +58,12 @@ if user:
             sound_play(user_id)
 
         elif Access=="3":
+            calcu.calculator()
             print("calculator")
+
+        elif Access=="4":
+            app_calender(user_id)
+
     else:
                 
         print("Wrong password!")
