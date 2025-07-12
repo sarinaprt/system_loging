@@ -35,9 +35,14 @@ def sound_play(user_id,speed=2.5):
                 play(sound)
         else:
             print("not found")
-
-username = input("Please enter your username: ").strip("")
-password = input("Please enter your password: ").strip("")
+while True:
+    try:
+        username = input("Please enter your username: ").strip()
+        password = input("Please enter your password: ").strip()
+        break
+    except KeyboardInterrupt as e :
+        print("enter your username or password")   
+print(f"{username} \n {password}")
 
 user=DDL.user_exist(username)
 
@@ -65,7 +70,7 @@ if user:
             app_calender(user_id)
 
     else:
-                
+                    
         print("Wrong password!")
 
 

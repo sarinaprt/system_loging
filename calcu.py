@@ -8,10 +8,21 @@ def calculator():
 
 
     def calculater():
-        current=number.get()
-        result=eval(current)
-        number.delete(0,END)
-        number.insert(END,result)
+        try:
+            current=number.get()
+            result=eval(current)
+            number.delete(0,END)
+            number.insert(END,result)
+        except ZeroDivisionError :
+            number.delete(0,END)
+            number.insert(END,"Can't divide by zero")
+        except SyntaxError:
+            number.delete(0,END)
+            number.insert(END,"Syntax Error")
+        except Exception:
+            number.delete(0,END)
+            number.insert(END,"there is something wrong")
+
     def clear():
         number.delete(0,END)
 
